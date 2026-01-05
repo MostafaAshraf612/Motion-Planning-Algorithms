@@ -58,48 +58,50 @@ Each algorithm is implemented for:
 4. Steer toward the sampled point:
    - Straight-line motion (holonomic)
    - Feasible kinematic motion (non-holonomic)
-5. Check for collision.
-6. Add the new node if collision-free.
-7. Repeat until the goal is reached or iterations end.
+5. Check for collisions along the path.
+6. Add the new node to the tree if it is collision-free.
+7. Repeat steps 2–6 until the goal is reached or the maximum number of iterations is exceeded.
 
 **Characteristics:**
-- Very fast initial solution.
-- Path is often jagged and sub-optimal.
-- No cost optimization.
+- Fast initial solution.
+- Path may be jagged or sub-optimal.
+- Does not optimize path cost.
 
 ---
 
-### 2️⃣ RRT* — Optimal RRT
+### 2️⃣ RRT* — Optimal Rapidly-Exploring Random Tree
 
-**Core Idea:** Improve RRT by **optimizing path cost** through choosing best parent and rewiring .
+**Core Idea:** Improve RRT by **optimizing path cost** through selecting the best parent and rewiring neighbors.
 
 **Steps:**
-1. Sample a random configuration.
-2. Get the nearest node to the newly created random node
-3. Move in the direction of the random node with a distance <= step size to create the new node 
-5. Find nearby nodes to the new node within a specified search radius.
-6. Choose the parent that minimizes total cost from start to new node.
-7. Insert the new node.
-8. **Rewire neighboring nodes** if a cheaper path exists:
-   (redo step 6 in the reverse order --> check if one of the neighbours of the new node can be connected to it to get a lower total cost).
-9. Repeat — path quality improves with more samples.
+1. Randomly sample a configuration in the space.
+2. Find the nearest node in the tree to the sampled point.
+3. Move in the direction of the sampled point, with a step size limit, to create a new node.
+4. Identify all nearby nodes within a specified search radius of the new node.
+5. Choose the parent node that minimizes the total cost from the start to the new node.
+6. Insert the new node into the tree.
+7. **Rewire neighboring nodes** if connecting through the new node reduces their total cost:
+   - Re-evaluate nearby nodes
+   - Check if connecting them via the new node lowers their cost
+   - Update their parent accordingly
+8. Repeat steps 1–7 until the goal is reached or the maximum number of iterations is exceeded.
 
 **Characteristics:**
-- Slower than RRT.
-- Produces shorter, smoother paths.
-- Asymptotically optimal.
+- Slower per iteration than RRT.
+- Produces shorter and smoother paths.
+- Asymptotically optimal as iterations increase.
 
 ---
 
-## 🔄 Holonomic vs Non-Holonomic Behavior
+### 🔄 Holonomic vs Non-Holonomic Behavior
 
 | Aspect | Holonomic | Non-Holonomic |
-|------|-----------|---------------|
+|--------|-----------|---------------|
 | State Space | (x, y) | (x, y, θ) |
-| Motion | Free | Constrained |
-| Collision Check | Simple | Along trajectory |
+| Motion | Free | Constrained by kinematics |
+| Collision Check | Simple | Along feasible trajectory |
 | Planning Difficulty | Lower | Higher |
-| Path Smoothness | Higher | Depends on steering |
+| Path Smoothness | High | Depends on steering |
 
 ---
 
@@ -109,10 +111,11 @@ Each algorithm is implemented for:
 
 | Algorithm | System Type | Planning Speed | Path Quality | Visualization |
 |---------|------------|---------------|--------------|---------------|
-| **RRT** | Holonomic | ⭐⭐⭐⭐ Fast | ⭐⭐ Longer | ![https://github.com/MostafaAshraf612/Motion-Planning-Algorithms/blob/main/RRT_Algorithms/Resullts/Holonomic/rrt_animation.gif](./gifs/rrt_holonomic.gif) |
-| **RRT** | Non-Holonomic | ⭐⭐⭐ Medium | ⭐⭐ Longer | ![https://github.com/MostafaAshraf612/Motion-Planning-Algorithms/blob/main/RRT_Algorithms/Resullts/Non_Holonomic/RRT_NH_animation.gif](./gifs/rrt_nonholonomic.gif) |
-| **RRT\*** | Holonomic | ⭐⭐ Slower | ⭐⭐⭐⭐ Short | ![https://github.com/MostafaAshraf612/Motion-Planning-Algorithms/blob/main/RRT_Algorithms/Resullts/Holonomic/rrt_star_animation.gif](./gifs/rrt_star_holonomic.gif) |
-| **RRT\*** | Non-Holonomic | ⭐ Slowest | ⭐⭐⭐⭐ Best | ![https://github.com/MostafaAshraf612/Motion-Planning-Algorithms/blob/main/RRT_Algorithms/Resullts/Non_Holonomic/RRT_star_NH_animation.gif](./gifs/rrt_star_nonholonomic.gif) |
+| **RRT** | Holonomic | ⭐⭐⭐⭐ Fast | ⭐⭐ Longer | ![RRT Holonomic](https://raw.githubusercontent.com/MostafaAshraf612/Motion-Planning-Algorithms/main/RRT_Algorithms/Results/Holonomic/rrt_animation.gif) |
+| **RRT** | Non-Holonomic | ⭐⭐⭐ Medium | ⭐⭐ Longer | ![RRT Non-Holonomic](https://raw.githubusercontent.com/MostafaAshraf612/Motion-Planning-Algorithms/main/RRT_Algorithms/Results/Non_Holonomic/RRT_NH_animation.gif) |
+| **RRT\*** | Holonomic | ⭐⭐ Slower | ⭐⭐⭐⭐ Short | ![RRT* Holonomic](https://raw.githubusercontent.com/MostafaAshraf612/Motion-Planning-Algorithms/main/RRT_Algorithms/Results/Holonomic/rrt_star_animation.gif) |
+| **RRT\*** | Non-Holonomic | ⭐ Slowest | ⭐⭐⭐⭐ Best | ![RRT* Non-Holonomic](https://raw.githubusercontent.com/MostafaAshraf612/Motion-Planning-Algorithms/main/RRT_Algorithms/Results/Non_Holonomic/RRT_star_NH_animation.gif) |
+
 
 > 📌 GIFs show tree expansion, collision-free exploration, and final paths.
 
