@@ -111,10 +111,10 @@ Each algorithm is implemented for:
 
 | Algorithm | System Type     | Planning Speed     | Path Quality       | Visualization |
 |-----------|----------------|------------------|------------------|---------------|
-| RRT       | Holonomic       | **⭐⭐⭐⭐**<br>Fast | **⭐⭐**<br>Longer | ![RRT Holonomic](RRT_Algorithms/Resullts/Holonomic/rrt_animation.gif) |
-| RRT       | Non-Holonomic   | **⭐⭐⭐**<br>Medium | **⭐⭐**<br>Longer | ![RRT Non-Holonomic](RRT_Algorithms/Resullts/Non_Holonomic/RRT_NH_animation.gif) |
-| RRT*      | Holonomic       | **⭐⭐**<br>Slower | **⭐⭐⭐⭐**<br>Short | ![RRT* Holonomic](RRT_Algorithms/Resullts/Holonomic/rrt_star_animation.gif) |
-| RRT*      | Non-Holonomic   | **⭐**<br>Slowest | **⭐⭐⭐⭐**<br>Best  | ![RRT* Non-Holonomic](RRT_Algorithms/Resullts/Non_Holonomic/RRT_star_NH_animation.gif) |
+| RRT       | Holonomic       | **⭐⭐⭐⭐**<br>Fast | **⭐⭐**<br>Longer | ![RRT Holonomic](RRT_Algorithms/Results/Holonomic/rrt_animation.gif) |
+| RRT       | Non-Holonomic   | **⭐⭐⭐**<br>Medium | **⭐⭐**<br>Longer | ![RRT Non-Holonomic](RRT_Algorithms/Results/Non_Holonomic/RRT_NH_animation.gif) |
+| RRT*      | Holonomic       | **⭐⭐**<br>Slower | **⭐⭐⭐⭐**<br>Short | ![RRT* Holonomic](RRT_Algorithms/Results/Holonomic/rrt_star_animation.gif) |
+| RRT*      | Non-Holonomic   | **⭐**<br>Slowest | **⭐⭐⭐⭐**<br>Best  | ![RRT* Non-Holonomic](RRT_Algorithms/Results/Non_Holonomic/RRT_star_NH_animation.gif) |
 
 > 📌 GIFs show tree expansion, collision-free exploration, and final paths.
 
